@@ -1,0 +1,9 @@
+.piePagina {
+    min-height: 125px;
+    width: 100%;
+    background-color: lightgray;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    color: #444;
+}

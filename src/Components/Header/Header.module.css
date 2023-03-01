@@ -1,0 +1,30 @@
+.cabecera {
+    min-height: 125px;
+    width: 100%;
+    background-color: lightgray;
+}
+.titulo {
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    color: gray;
+}
+.navegacion {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    vertical-align: center;
+}
+.navegacion a {
+    font-size: 25px;
+    text-decoration: none;
+    width: 50%;
+    text-align: center;
+    padding: 5px;
+    color: #444;
+}
+.navegacion a:hover {
+    background-color: red;
+    color: #EEE;
+}
