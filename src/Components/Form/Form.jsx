@@ -18,26 +18,11 @@ const Formulario = () => {
 
     const {register, formState: {errors}, handleSubmit} = useForm()
     const product = (data) => {
-        //addProdInDb(data)
         addItem(data)
+        console.log(data)
         dispatch(addProd(data));
         navigate('/productos')
     }
-
-    /*const addProdInDb = (data) => {
-        fetch('http://localhost:5000/add'), {
-        method: 'POST',
-        body: JSON.stringify({
-        name: data.name,
-        stock: data.stock,
-        price: data.price,
-        description: data.description,
-        }),
-        headers: {
-         'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-    }*/
 
     return (
     <div className={styles.frmProd}>

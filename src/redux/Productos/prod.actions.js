@@ -18,3 +18,9 @@ export const removeProd = (id) => {
       payload: id
     };
 };
+
+export const getProducts = () => {
+  return {
+    type: "GET_PROD",
+  }
+}
