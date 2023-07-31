@@ -4,8 +4,6 @@ import Home from './Screens/Home';
 import Productos from './Screens/Productos';
 import FormAdd from './Screens/FormAdd';
 import FormEdit from './Screens/FormEdit';
-import { useDispatch } from "react-redux";
-import { addProd } from "./redux/Productos/prod.actions";
 
 function App() {
 

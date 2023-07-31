@@ -1,6 +1,6 @@
 # Parcial MCGA - 02
 
-Examen 02 materia MCGA - 15/11/22
+Examen final MCGA - 08/08/23
 
 ## Description
 
@@ -41,7 +41,7 @@ npm install react-hook-form
 
 ## Version History
 * 0.1
-    * Versión inicial
+    * Versiones de prueba
 
 ## License
 

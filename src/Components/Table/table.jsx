@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Boton from "../SharedComponents/Boton";
 import styles from './Table.module.css';
 import { remProd } from '../../redux/Productos/prod.actions';
-//import { REM_PROD } from "../../redux/Productos/prod.types";
 
 const Tabla = () => {
   const products = useSelector((state) => state.redProduct.products);

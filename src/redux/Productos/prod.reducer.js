@@ -1,4 +1,4 @@
-import {ADD_PROD, EDIT_PROD, REM_PROD, GET_PROD_CLOUD} from './prod.types';
+import {ADD_PROD, EDIT_PROD, REM_PROD, GET_PROD_CLOUD_SUCCESS, GET_PROD_CLOUD_FAIL} from './prod.types';
 
 const INITIAL_STATE = {
     products: [],
@@ -28,6 +28,11 @@ const reducer = (state = INITIAL_STATE, action) => {
                   return product.id !== action.payload;
                 })
             };
+        
+        case GET_PROD_CLOUD_SUCCESS:
+            return {
+                //products: 
+            }
 
         default: return state;
     }

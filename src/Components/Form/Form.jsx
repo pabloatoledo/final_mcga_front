@@ -1,43 +1,27 @@
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addProd } from "../../redux/Productos/prod.actions";
 import ProdInput from "../SharedComponents/Input";
 import Boton from "../SharedComponents/Boton";
 import styles from './Form.module.css';
 
 const Formulario = () => {
-    const [datos, setItem] = useState({})
+    //const [datos, setItem] = useState({})
     const dispatch = useDispatch();
     const navigate = useNavigate()
     
-    const addItem = (item) => {
-        setItem({id: item.id, name: item.name, price: item.price})
-    }
+    // const addItem = (item) => {
+    //     setItem({id: item.id, name: item.name, price: item.price})
+    // }
 
     const {register, formState: {errors}, handleSubmit} = useForm()
     const product = (data) => {
-        //addProdInDb(data)
-        addItem(data)
+        // addItem(data)
         dispatch(addProd(data));
         navigate('/productos')
     }
-
-    /*const addProdInDb = (data) => {
-        fetch('http://localhost:5000/add'), {
-        method: 'POST',
-        body: JSON.stringify({
-        name: data.name,
-        stock: data.stock,
-        price: data.price,
-        description: data.description,
-        }),
-        headers: {
-         'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-    }*/
 
     return (
     <div className={styles.frmProd}>
