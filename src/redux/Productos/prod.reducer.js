@@ -1,4 +1,4 @@
-//import {addProd, editProd, remProd} from './prod.types';
+import {ADD_PROD, EDIT_PROD, REM_PROD, GET_PROD_CLOUD} from './prod.types';
 
 const INITIAL_STATE = {
     products: [],
@@ -6,12 +6,12 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'ADD_PROD':
+        case ADD_PROD:
             return {
                 products: [...state.products, action.payload]
             };
 
-        case 'EDIT_PROD':
+        case EDIT_PROD:
             const updProdDetail = action.payload;
             const updProd = state.products.map((product) => {
             if (product.id === updProdDetail.id) {
@@ -22,7 +22,7 @@ const reducer = (state = INITIAL_STATE, action) => {
             });
             return { products: updProd };
 
-        case 'REMOVE_PROD':
+        case REM_PROD:
             return {
                 products: state.products.filter((product) => {
                   return product.id !== action.payload;

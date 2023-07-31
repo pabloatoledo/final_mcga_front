@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Boton from "../SharedComponents/Boton";
 import styles from './Table.module.css';
-import { removeProd } from '../../redux/Productos/prod.actions';
+import { remProd } from '../../redux/Productos/prod.actions';
+//import { REM_PROD } from "../../redux/Productos/prod.types";
 
 const Tabla = () => {
   const products = useSelector((state) => state.redProduct.products);
@@ -29,7 +30,7 @@ const Tabla = () => {
                                 tipo='editProd'
                                 texto='Editar' />
                           </Link>
-                          <button className={styles.elimProd} onClick={() => dispatch(removeProd(product.id))}> Eliminar </button>
+                          <button className={styles.elimProd} onClick={() => dispatch(remProd(product.id))}> Eliminar </button>
                         </td>
                     </tr>
                 </tbody>
