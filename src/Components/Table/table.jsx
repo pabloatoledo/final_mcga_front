@@ -6,7 +6,7 @@ import styles from './Table.module.css';
 import { removeProd } from '../../redux/Productos/prod.actions';
 
 const Tabla = () => {
-  const products = useSelector((state) => state.Reduc.products);
+  const products = useSelector((state) => state.redProduct.products);
   const dispatch = useDispatch();
   return (
     <div>

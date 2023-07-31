@@ -10,7 +10,7 @@ import Tabla from '../../Components/Table/table'
 import TablaCabecera from '../../Components/Table/tableHead'
 
 const Productos = () => {
-    const products = useSelector((state) => state.Reduc.products);
+    const products = useSelector((state) => state.redProduct.products);
     const dispatch = useDispatch();
     return (
         <div> 

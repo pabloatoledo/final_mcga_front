@@ -8,7 +8,7 @@ const EditProd = () => {
   
   const [selectedProd, setSelectedProd] = useState({});
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.Reduc.products);
+  const products = useSelector((state) => state.redProduct.products);
   const currentId = useParams();
 
   const navigate = useNavigate();
