@@ -12,6 +12,7 @@ import TablaCabecera from '../../Components/Table/tableHead'
 const Productos = () => {
     const products = useSelector((state) => state.redProduct.products);
     const dispatch = useDispatch();
+
     return (
         <div> 
         <HeaderSection />

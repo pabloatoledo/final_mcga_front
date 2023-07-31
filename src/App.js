@@ -9,8 +9,6 @@ import { addProd } from "./redux/Productos/prod.actions";
 
 function App() {
 
-  const dispatch = useDispatch();
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
