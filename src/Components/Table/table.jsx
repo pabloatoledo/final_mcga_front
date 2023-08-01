@@ -1,21 +1,20 @@
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Boton from "../SharedComponents/Boton";
 import styles from './Table.module.css';
 import { remProd } from '../../redux/Productos/prod.actions';
+import { useEffect, useState } from "react";
 
 const Tabla = () => {
   const products = useSelector((state) => state.redProduct.products);
   const dispatch = useDispatch();
+  
   return (
     <div>
-      
     {products.length > 0 ? (
       <div>
           {products.map((product) => (
             <table className={styles.Table} key={product.id}>
-                
                 <tbody>
                     <tr>
                         <td className={styles.tdDatos}>{product.id}</td>

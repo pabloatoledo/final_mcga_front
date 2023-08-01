@@ -1,13 +1,38 @@
-import {ADD_PROD, EDIT_PROD, REM_PROD, GET_PROD_CLOUD_SUCCESS, GET_PROD_CLOUD_FAIL} from './prod.types';
+import { useNavigate } from 'react-router-dom';
+import {ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
 import {useState} from 'react'
 
-//const dispatch = useDispatch()
+export const addProd = (prod) => dispatch => {
 
-export const addProd = (prod) => {
-    return {
-      type: ADD_PROD,
-      payload: prod
-    };
+  try {
+    fetch ( "https://final-mcga-back.vercel.app/final_mcga/products", 
+    {
+    method: 
+        "POST",
+    headers: 
+        {"Content-Type": "application/json"},
+    body: 
+        JSON.stringify({
+            id: prod.id,
+            name: prod.name,
+            price: prod.price,
+            stock: prod.stock,
+            description: prod.description})
+    })
+    .then(function(respuesta) {
+      console.log(respuesta)
+      if (respuesta.ok) {
+        return {
+          type: ADD_PROD,
+          payload: prod
+        };
+      } else {
+        console.log("fallo la subida")
+      }
+    })
+    } catch (error) {
+      console.log(error)
+    }
 };
   
 export const editProd = (prod) => {
@@ -25,26 +50,19 @@ export const remProd = (id) => {
 };
 
 export const getProdCloud = () => async dispatch => {
-  // const config = {
-  //   headers: {
-  //     'Accept': 'application/json'
-  //   }
-  // }
-
-  const [getDataCloud, setGetDataCloud] = useState(false)
+  let respOk = false
 
   try {
-    await fetch('https://final-mcga-back.vercel.app/exam_01_mcga/products/all')
+    await fetch('https://final-mcga-back.vercel.app/final_mcga/products/all')
     .then(function(respuesta) {
       if (respuesta.ok) {
-        setGetDataCloud(true)
+        respOk = true
       }
       return respuesta.json()
     })
     .then((data) => {
-      if (getDataCloud) {
+      if (respOk) {
         const prodCloud = data.data
-        console.log("entro ok")
         console.log(prodCloud)
 
         if (prodCloud.length > 0) {
@@ -55,20 +73,12 @@ export const getProdCloud = () => async dispatch => {
             })
           })
         }
-
-        
       } else {
-        dispatch({
-          type: GET_PROD_CLOUD_FAIL,
-        })
+        console.log("fallo la conexion")
       }
     })
-    
   }
   catch (error) {
-    dispatch({
-      type: GET_PROD_CLOUD_FAIL,
-    })
+    console.log(error)
   }
-
 }

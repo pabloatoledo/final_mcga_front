@@ -4,8 +4,13 @@ import Home from './Screens/Home';
 import Productos from './Screens/Productos';
 import FormAdd from './Screens/FormAdd';
 import FormEdit from './Screens/FormEdit';
+import { useDispatch } from 'react-redux';
+import { getProdCloud } from './redux/Productos/prod.actions';
 
 function App() {
+
+  const dispatch = useDispatch();
+  dispatch(getProdCloud());
 
   return (
     <Routes>
