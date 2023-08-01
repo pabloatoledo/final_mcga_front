@@ -8,17 +8,11 @@ import Boton from "../SharedComponents/Boton";
 import styles from './Form.module.css';
 
 const Formulario = () => {
-    //const [datos, setItem] = useState({})
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    
-    // const addItem = (item) => {
-    //     setItem({id: item.id, name: item.name, price: item.price})
-    // }
 
     const {register, formState: {errors}, handleSubmit} = useForm()
     const product = (data) => {
-        // addItem(data)
         dispatch(addProd(data));
         navigate('/productos')
     }

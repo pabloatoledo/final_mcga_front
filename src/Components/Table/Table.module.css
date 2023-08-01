@@ -35,4 +35,5 @@ td {
     border-radius: 10px;
     margin: 10PX;
     background-color: red;
+    cursor: pointer;
 }
