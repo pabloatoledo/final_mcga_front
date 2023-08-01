@@ -2,10 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import {ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
 import {useState} from 'react'
 
-export const addProd = (prod) => dispatch => {
+export const addProd = (prod) => async dispatch => {
 
   try {
-    fetch ( "https://final-mcga-back.vercel.app/final_mcga/products", 
+    await fetch ( "https://final-mcga-back.vercel.app/final_mcga/products", 
     {
     method: 
         "POST",
@@ -42,11 +42,26 @@ export const editProd = (prod) => {
     };
 };
   
-export const remProd = (id) => {
-    return {
-      type: REM_PROD,
-      payload: id
-    };
+export const remProd = (prod) => async dispatch => {
+  try {
+    await fetch ('https://final-mcga-back.vercel.app/final_mcga/products/' + prod._id,
+    {
+      method: "DELETE"
+    })
+    .then(function(respuesta) {
+      console.log(respuesta)
+      if (respuesta.ok) {
+        return {
+          type: REM_PROD,
+          payload: prod.id
+        };
+      } else {
+        console.log("fallo la subida")
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 export const getProdCloud = () => async dispatch => {

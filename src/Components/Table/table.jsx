@@ -8,6 +8,10 @@ import { useEffect, useState } from "react";
 const Tabla = () => {
   const products = useSelector((state) => state.redProduct.products);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("renderiza")
+  }, [products])
   
   return (
     <div>
@@ -28,7 +32,7 @@ const Tabla = () => {
                                 tipo='editProd'
                                 texto='Editar' />
                           </Link>
-                          <button className={styles.elimProd} onClick={() => dispatch(remProd(product.id))}> Eliminar </button>
+                          <button className={styles.elimProd} onClick={() => dispatch(remProd(product))}> Eliminar </button>
                         </td>
                     </tr>
                 </tbody>
