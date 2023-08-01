@@ -35,11 +35,36 @@ export const addProd = (prod) => async dispatch => {
     }
 };
   
-export const editProd = (prod) => {
-    return {
-      type: EDIT_PROD,
-      payload: prod
-    };
+export const editProd = (prod) => async dispatch => {
+  try {
+    await fetch ("https://final-mcga-back.vercel.app/final_mcga/products/" + prod._id, 
+    {
+    method: 
+        "PUT",
+    headers: 
+        {"Content-Type": "application/json"},
+    body: 
+        JSON.stringify({
+            id: prod.id,
+            name: prod.name,
+            price: prod.price,
+            stock: prod.stock,
+            description: prod.description})
+    })
+    .then(function(respuesta) {
+      console.log(respuesta)
+      if (respuesta.ok) {
+        return {
+          type: EDIT_PROD,
+          payload: prod
+        };
+      } else {
+        console.log("fallo la edición")
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
 };
   
 export const remProd = (prod) => async dispatch => {
@@ -56,7 +81,7 @@ export const remProd = (prod) => async dispatch => {
           payload: prod.id
         };
       } else {
-        console.log("fallo la subida")
+        console.log("fallo al borrar")
       }
     })
   } catch (error) {
