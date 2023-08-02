@@ -2,19 +2,35 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Boton from "../SharedComponents/Boton";
 import styles from './Table.module.css';
+import Modal from "../Modal/Modal";
 import { remProd } from '../../redux/Productos/prod.actions';
 import { useEffect, useState } from "react";
 
 const Tabla = () => {
   const products = useSelector((state) => state.redProduct.products);
   const dispatch = useDispatch();
+  const [delProd, setDelProd] = useState(false)
+  const [eliProd, setEliProd] = useState()
 
-  useEffect(() => {
-    console.log("renderiza")
-  }, [products])
-  
+  const delProdu = (prod) => {
+    setEliProd(prod)
+    setDelProd(true)
+  }
+
+  const cancDelProd = () => {
+    setDelProd(false)
+  }
+
   return (
     <div>
+    {
+    delProd ? 
+    <Modal 
+      texto='¿Desea eliminar el producto?'
+      estilo='delProd' 
+      cerrar={cancDelProd}
+      producto={eliProd} /> : <div></div>
+    }
     {products.length > 0 ? (
       <div>
           {products.map((product) => (
@@ -32,7 +48,7 @@ const Tabla = () => {
                                 tipo='editProd'
                                 texto='Editar' />
                           </Link>
-                          <button className={styles.elimProd} onClick={() => dispatch(remProd(product))}> Eliminar </button>
+                          <button className={styles.elimProd} onClick={() => delProdu(product)}> Eliminar </button>
                         </td>
                     </tr>
                 </tbody>

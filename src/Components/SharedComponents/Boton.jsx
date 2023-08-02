@@ -1,9 +1,11 @@
 import React from "react";
 import './Boton.css';
 
-const Boton = ({ tipo, texto }) => {
+const Boton = ({ tipo, texto, onClick }) => {
     return(
-        <button className={tipo}>{texto}</button>
+        <button className={`estilos-de-tu-boton ${tipo}`} onClick={onClick}>
+      {texto}
+    </button>
     );
 }
 

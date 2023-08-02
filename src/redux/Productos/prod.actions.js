@@ -20,7 +20,6 @@ export const addProd = (prod) => async dispatch => {
             description: prod.description})
     })
     .then(function(respuesta) {
-      console.log(respuesta)
       if (respuesta.ok) {
         return {
           type: ADD_PROD,
@@ -103,7 +102,6 @@ export const getProdCloud = () => async dispatch => {
     .then((data) => {
       if (respOk) {
         const prodCloud = data.data
-        console.log(prodCloud)
 
         if (prodCloud.length > 0) {
           prodCloud.map((producto) => {

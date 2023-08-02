@@ -12,7 +12,9 @@
     cursor: pointer;
 }
 .editProd,
-.elimProd {
+.elimProd,
+.confElimProd,
+.cancElimProd {
     background-color: blue;
     width: 40%;
     font-weight: 500;
@@ -26,4 +28,18 @@
 }
 .elimProd {
     background-color: red;
+}
+.confElimProd,
+.cancElimProd {
+    font-size: medium;
+    background-color: red;
+    width: 25%;
+    margin-left: 15%;
+    height: 50px;
+}
+.cancElimProd {
+    background-color: gray;
+    border: 1px solid;
+    border-color: black;
+    margin-right: 15%;
 }
