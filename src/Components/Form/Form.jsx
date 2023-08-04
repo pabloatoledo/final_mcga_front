@@ -1,41 +1,64 @@
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addProd } from "../../redux/Productos/prod.actions";
+import { addProd, addProductRequest } from "../../redux/Productos/prod.actions";
 import ProdInput from "../SharedComponents/Input";
 import Boton from "../SharedComponents/Boton";
 import styles from './Form.module.css';
+import Modal from "../Modal/Modal";
 
 const Formulario = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const {register, formState: {errors}, handleSubmit} = useForm()
-    const product = (data) => {
-        dispatch(addProd(data));
-        navigate('/productos')
+    const [modNewProd, setModNewProd] = useState(false)
+
+    const newProd = () => {
+        setModNewProd(false)
     }
 
+    const {register, formState: {errors}, handleSubmit} = useForm()
+
+    const product = async (data) => {        
+        setModNewProd(true);
+        try {
+            let newProduct = await dispatch(addProd(data));
+            console.log(newProduct)
+            navigate('/productos');
+            setModNewProd(false)
+            //window.location.href = "./productos"
+        } catch (error) {
+            // Maneja el error si es necesario.
+        }
+    }
+
+    
     return (
     <div className={styles.frmProd}>
+        {
+            modNewProd ? 
+            <Modal 
+            texto='Se estan enviando los datos'
+            tipo='nuevoProd' /> : <div></div>
+        }
         <h2>Formulario</h2>
         <form onSubmit={handleSubmit(product)}>
             <div>
-                <label>Id</label>
+                <label>Id: </label>
                 <ProdInput
                     register={register}
                     type="text"
                     placeholder="id"
                     name="id"
                     rules={{
-                        //required: 'ingrese número de ID'
+                        required: 'ingrese número de ID'
                     }}
                 />
                 {errors.id && <span className={styles.claseError}>{errors.id.message}</span>}
             </div>
             <div>
-                <label>Nombre:</label>
+                <label>Nombre: </label>
                 <ProdInput
                     register={register}
                     type="text"
@@ -48,10 +71,10 @@ const Formulario = () => {
                 {errors.name && <span className={styles.claseError}>{errors.name.message}</span>}
             </div>
             <div>
-                <label>Precio:</label>
+                <label>Precio: </label>
                 <ProdInput
                     register={register}
-                    type="text"
+                    type="number"
                     placeholder="precio"
                     name="price"
                     rules={{
@@ -61,10 +84,10 @@ const Formulario = () => {
                 {errors.price && <span className={styles.claseError}>{errors.price.message}</span>}
             </div>
             <div>
-                <label>Stock:</label>
+                <label>Stock: </label>
                 <ProdInput
                     register={register}
-                    type="text"
+                    type="number"
                     placeholder="stock"
                     name="stock"
                     rules={{
@@ -74,7 +97,7 @@ const Formulario = () => {
                 {errors.stock && <span className={styles.claseError}>{errors.stock.message}</span>}
             </div>
             <div>
-                <label>Descripcion:</label>
+                <label>Descripcion: </label>
                 <ProdInput
                     register={register}
                     type="text"

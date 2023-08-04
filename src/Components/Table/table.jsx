@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Boton from "../SharedComponents/Boton";
 import styles from './Table.module.css';
 import Modal from "../Modal/Modal";
-import { remProd } from '../../redux/Productos/prod.actions';
 import { useEffect, useState } from "react";
 
 const Tabla = () => {
-  const products = useSelector((state) => state.redProduct.products);
-  const dispatch = useDispatch();
+  let products = useSelector((state) => state.redProduct.products);
+  
   const [delProd, setDelProd] = useState(false)
   const [eliProd, setEliProd] = useState()
 
@@ -22,17 +21,17 @@ const Tabla = () => {
   }
 
   return (
-    <div>
-    {
-    delProd ? 
-    <Modal 
-      texto='¿Desea eliminar el producto?'
-      estilo='delProd' 
-      cerrar={cancDelProd}
-      producto={eliProd} /> : <div></div>
-    }
-    {products.length > 0 ? (
-      <div>
+    <div>    
+      {
+      delProd ? 
+      <Modal 
+        texto='¿Desea eliminar el producto?'
+        cerrar={cancDelProd}
+        producto={eliProd}
+        tipo='elimProd' /> : <div></div>
+      }
+      {products.length > 0 ? (
+        <div>
           {products.map((product) => (
             <table className={styles.Table} key={product.id}>
                 <tbody>

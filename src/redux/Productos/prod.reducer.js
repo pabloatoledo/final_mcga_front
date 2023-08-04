@@ -1,7 +1,9 @@
-import {ADD_PROD, EDIT_PROD, REM_PROD, REM_ALL_PROD } from './prod.types';
+import { ADD_PROD, EDIT_PROD, REM_PROD, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS } from './prod.types';
 
 const INITIAL_STATE = {
     products: [],
+    loading: false,
+    productAdded: false,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -28,15 +30,18 @@ const reducer = (state = INITIAL_STATE, action) => {
                   return product.id !== action.payload;
                 })
             };
-
-        case REM_ALL_PROD:
-            const allProd = state.products
-            allProd = []
+        
+        case ADD_PRODUCT_REQUEST:
             return {
-                products: []
-                
-                //allProd
-            }
+                loading: true,
+                productAdded: false,
+            };
+
+        case ADD_PRODUCT_SUCCESS:
+            return {
+                loading: false,
+                productAdded: true,
+            };
 
         default: return state;
     }

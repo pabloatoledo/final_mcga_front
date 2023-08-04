@@ -1,9 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import {ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
-import {useState} from 'react'
 
 export const addProd = (prod) => async dispatch => {
-
   try {
     await fetch ( "https://final-mcga-back.vercel.app/final_mcga/products", 
     {
@@ -21,10 +18,11 @@ export const addProd = (prod) => async dispatch => {
     })
     .then(function(respuesta) {
       if (respuesta.ok) {
-        return {
+        console.log("se agrego el producto: ",prod)
+        dispatch({
           type: ADD_PROD,
           payload: prod
-        };
+        })
       } else {
         console.log("fallo la subida")
       }
@@ -53,10 +51,10 @@ export const editProd = (prod) => async dispatch => {
     .then(function(respuesta) {
       console.log(respuesta)
       if (respuesta.ok) {
-        return {
+        dispatch({
           type: EDIT_PROD,
           payload: prod
-        };
+        }) 
       } else {
         console.log("fallo la edición")
       }
@@ -75,10 +73,10 @@ export const remProd = (prod) => async dispatch => {
     .then(function(respuesta) {
       console.log(respuesta)
       if (respuesta.ok) {
-        return {
-          type: REM_PROD,
-          payload: prod.id
-        };
+        dispatch({
+            type: REM_PROD,
+            payload: prod.id
+          })
       } else {
         console.log("fallo al borrar")
       }

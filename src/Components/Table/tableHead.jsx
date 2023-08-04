@@ -7,9 +7,9 @@ const TablaCabecera = () => {
                 <tr>
                     <th className={styles.thDatos}>Id</th>
                     <th className={styles.thDatos}>Nombre</th>
-                    <th className={styles.thDatos}>Descripción</th>
-                    <th className={styles.thDatos}>Stock</th>
                     <th className={styles.thDatos}>Precio</th>
+                    <th className={styles.thDatos}>Stock</th>
+                    <th className={styles.thDatos}>Descripción</th>
                     <th className={styles.thBotones}>Acción</th>
                 </tr>
             </thead>
