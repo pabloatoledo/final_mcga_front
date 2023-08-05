@@ -23,13 +23,12 @@ const Formulario = () => {
     const product = async (data) => {        
         setModNewProd(true);
         try {
-            let newProduct = await dispatch(addProd(data));
-            console.log(newProduct)
+            await dispatch(addProd(data));
             navigate('/productos');
             setModNewProd(false)
-            //window.location.href = "./productos"
         } catch (error) {
-            // Maneja el error si es necesario.
+            <Modal 
+                texto='Fallo al subir el archivo' />
         }
     }
 

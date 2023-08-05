@@ -16,25 +16,27 @@ export const addProd = (prod) => async dispatch => {
             stock: prod.stock,
             description: prod.description})
     })
-    .then(function(respuesta) {
+    .then(async function(respuesta) {
       if (respuesta.ok) {
-        console.log("se agrego el producto: ",prod)
+        const dataNewProd = await respuesta.json()
+        console.log(dataNewProd.data)
         dispatch({
           type: ADD_PROD,
           payload: prod
         })
-      } else {
-        console.log("fallo la subida")
+      }
+      else {
+      console.log("fallo la subida")
       }
     })
-    } catch (error) {
-      console.log(error)
-    }
+  } catch (error) {
+    console.log(error)
+  }
 };
   
 export const editProd = (prod) => async dispatch => {
   try {
-    await fetch ("https://final-mcga-back.vercel.app/final_mcga/products/" + prod._id, 
+    await fetch ("https://final-mcga-back.vercel.app/final_mcga/products/" + prod.id, 
     {
     method: 
         "PUT",
@@ -66,7 +68,7 @@ export const editProd = (prod) => async dispatch => {
   
 export const remProd = (prod) => async dispatch => {
   try {
-    await fetch ('https://final-mcga-back.vercel.app/final_mcga/products/' + prod._id,
+    await fetch ('https://final-mcga-back.vercel.app/final_mcga/products/' + prod.id,
     {
       method: "DELETE"
     })
