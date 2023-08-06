@@ -58,8 +58,6 @@ const Login = () => {
     return(
         <div>
         <Header />
-            
-        {console.log(auth)}
             <h1>Gestión del perfil</h1>
             {auth.currentUser == null ? 
             <>
@@ -84,11 +82,8 @@ const Login = () => {
             </>:<>
                 <button onClick={() => cerrarSesion()}>Cerrar sesión</button>            
             </>}
-            
-
             <Footer />
         </div>
-
     )
 }
 

@@ -15,6 +15,7 @@ const EditProd = () => {
     const navigate = useNavigate();
     const onSubmitHandler = () => {
         dispatch(editProd(selectedProd));
+
         navigate("/productos");
     };
 
@@ -34,12 +35,13 @@ const EditProd = () => {
                 value={selectedProd.name}
                 name="name"
                 placeholder="Enter Name"
+                className={styles.inpForm}
                 />
             </div>
             <div>
             <label>Precio:</label>
                 <input
-                type="text"
+                type="number"
                 onChange = {(e) => setSelectedProd({...selectedProd, price: e.target.value})}
                 value={selectedProd.price}
                 name="price"
@@ -49,7 +51,7 @@ const EditProd = () => {
             <div>
                 <label>Stock:</label>
                 <input
-                type="text"
+                type="number"
                 onChange = {(e) => setSelectedProd({...selectedProd, stock: e.target.value})}
                 value={selectedProd.stock}
                 name="stock"

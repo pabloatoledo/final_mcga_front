@@ -1,10 +1,11 @@
-# Parcial MCGA - 02
+# Final MCGA - 2023
 
 Examen final MCGA - 08/08/23
 
-## Description
+## Descripción
 
 El proyecto consiste en realizar un ABM de productos basada en React, formulario y validaciones con React Hook Form, uso de Redux y conectado a una API con una DB realizada anteriormente con Mongo DB.
+Además, contiene autenticación de usuarios mediante Firebase.
 
 ## Getting Started
 

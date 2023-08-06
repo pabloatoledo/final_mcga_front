@@ -1,9 +1,7 @@
-import { ADD_PROD, EDIT_PROD, REM_PROD, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS } from './prod.types';
+import { ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
 
 const INITIAL_STATE = {
     products: [],
-    loading: false,
-    productAdded: false,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -29,18 +27,6 @@ const reducer = (state = INITIAL_STATE, action) => {
                 products: state.products.filter((product) => {
                   return product.id !== action.payload;
                 })
-            };
-        
-        case ADD_PRODUCT_REQUEST:
-            return {
-                loading: true,
-                productAdded: false,
-            };
-
-        case ADD_PRODUCT_SUCCESS:
-            return {
-                loading: false,
-                productAdded: true,
             };
 
         default: return state;
