@@ -4,15 +4,19 @@ import { ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
 const token = Cookies.get('firebaseToken');
 
 export const addProd = (prod) => async dispatch => {
+  const tokenauthorization = "Bearer " + token
+  
+  console.log(tokenauthorization)
   try {
-    await fetch ( "https://final-mcga-back.vercel.app/final_mcga/products", 
+    await fetch ( "https://final-mcga-back.vercel.app/final_mcga/products/", 
+    // const respNewProd = await fetch( "http://localhost:5000/final_mcga/products" ,
     {
-    method: 
-        "POST",
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-    body: 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: 
         JSON.stringify({
             id: prod.id,
             name: prod.name,
