@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import firebaseAapp from "../../Firebase/credenciales";
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 
@@ -24,14 +25,15 @@ const Login = () => {
     }
 
     const inciarSesion = async (email, password) => {
-        console.log("abre el modal de inicio de sesion")
-        await signInWithEmailAndPassword(auth, email, password)
-        .then((resp) => {
-            console.log("cierra el modal de inicio de sesion")
-        })
-        .catch((error) => {
-            console.log("modal pidiendo revisar el login")
-        })
+        try {
+            console.log("abre el modal de inicio de sesion");
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const token = await userCredential.user.getIdToken();
+            Cookies.set('firebaseToken', token, { expires: 1 / 24 });     
+            console.log("cierra el modal de inicio de sesion");
+        } catch (error) {
+            console.log("modal pidiendo revisar el login");
+        }
     }
 
     const cerrarSesion = async (e) => {
@@ -59,6 +61,7 @@ const Login = () => {
         <div>
         <Header />
             <h1>Gestión del perfil</h1>
+            {console.log(auth)}
             {auth.currentUser == null ? 
             <>
                 {noUserReg ? <><h2>Ingresa los datos para registrarte</h2></>:<><h2>Inicia sesión</h2></>}

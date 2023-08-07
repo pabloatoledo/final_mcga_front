@@ -15,21 +15,10 @@ const auth = getAuth(firebaseAapp)
 
 const Productos = () => {
 
-    const [userLogin, setUserLogin] = useState(false)
-
-    onAuthStateChanged(auth, (userFirebase) => {
-        if(userFirebase) {
-            setUserLogin(userFirebase)
-        } else {
-            setUserLogin(null)
-        }
-    })
-
-    console.log("El usuario es: ",userLogin)
     return (
         <div> 
         <HeaderSection />
-        {userLogin ? 
+        {auth.currentUser != null ? 
         <>
             <div className={styles.botProd}>
                 <Link to="/addproduct">

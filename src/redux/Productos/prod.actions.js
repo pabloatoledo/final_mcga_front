@@ -1,4 +1,7 @@
-import {ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
+import Cookies from 'js-cookie';
+import { ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
+
+const token = Cookies.get('firebaseToken');
 
 export const addProd = (prod) => async dispatch => {
   try {
@@ -6,8 +9,9 @@ export const addProd = (prod) => async dispatch => {
     {
     method: 
         "POST",
-    headers: 
-        {"Content-Type": "application/json"},
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
     body: 
         JSON.stringify({
             id: prod.id,
@@ -40,8 +44,10 @@ export const editProd = (prod) => async dispatch => {
     {
     method: 
         "PUT",
-    headers: 
-        {"Content-Type": "application/json"},
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
     body: 
         JSON.stringify({
             id: prod.id,
@@ -70,7 +76,11 @@ export const remProd = (prod) => async dispatch => {
   try {
     await fetch ('https://final-mcga-back.vercel.app/final_mcga/products/' + prod.id,
     {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
     })
     .then(function(respuesta) {
       console.log(respuesta)
