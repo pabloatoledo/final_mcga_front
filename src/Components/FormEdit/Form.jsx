@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Boton from "../../Components/SharedComponents/Boton";
 import { editProd } from '../../redux/Productos/prod.actions';
 import styles from './Form.module.css';
+import Modal from "../Modal/Modal";
 
 const EditProd = () => {
   
@@ -12,10 +13,21 @@ const EditProd = () => {
     const products = useSelector((state) => state.redProduct.products);
     const currentId = useParams();
 
-    const navigate = useNavigate();
-    const onSubmitHandler = () => {
-        dispatch(editProd(selectedProd));
+    const [modEditProd, setModEditProd] = useState(false)
+    const [modFallaEdit, setModFallaEdit] = useState(false)
 
+    const navigate = useNavigate();
+    const onSubmitHandler = async () => {
+        try {
+            await dispatch(editProd(selectedProd));
+            setModEditProd(false)
+        } catch (error) {
+            setModEditProd(false)
+            setModFallaEdit(true)
+            setTimeout(() => {
+                setModFallaEdit(false)
+            }, 2000);
+        }
         navigate("/productos");
     };
 
@@ -25,6 +37,19 @@ const EditProd = () => {
     }, [currentId]);
 
     return (
+        <>
+        {
+            modEditProd ? 
+            <Modal 
+            texto='Aguarde mientras se actualizan los datos'
+            tipo='nuevoProd' /> : <div></div>
+        }
+        {
+            modFallaEdit ? 
+            <Modal 
+            texto='Falló al actualizar los datos'
+            tipo='nuevoProd' /> : <div></div>
+        }
         <div className={styles.frmProd}>
             <form onSubmit={onSubmitHandler}>
             <div>
@@ -65,7 +90,7 @@ const EditProd = () => {
                 onChange = {(e) => setSelectedProd({...selectedProd, description: e.target.value})}
                 value={selectedProd.description}
                 name="description"
-                placeholder="Ingrese la descripcion"
+                placeholder="Ingrese la descripción"
                 />
             </div>
 
@@ -74,6 +99,7 @@ const EditProd = () => {
                 texto='Guardar' />
         </form>
         </div>
+        </>
     );
 };
 

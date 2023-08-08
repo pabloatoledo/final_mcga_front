@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProd, addProductRequest } from "../../redux/Productos/prod.actions";
@@ -13,6 +13,7 @@ const Formulario = () => {
     const navigate = useNavigate()
 
     const [modNewProd, setModNewProd] = useState(false)
+    const [modFallaProd, setModFallaProd] = useState(false)
 
     const newProd = () => {
         setModNewProd(false)
@@ -24,21 +25,29 @@ const Formulario = () => {
         setModNewProd(true);
         try {
             await dispatch(addProd(data));
-            navigate('/productos');
             setModNewProd(false)
         } catch (error) {
-            <Modal 
-                texto='Fallo al subir el archivo' />
+            setModNewProd(false)
+            setModFallaProd(true)
+            setTimeout(() => {
+                setModNewProd(false)
+            }, 2000);
         }
+        navigate('/productos');
     }
 
-    
     return (
     <div className={styles.frmProd}>
         {
             modNewProd ? 
             <Modal 
             texto='Se estan enviando los datos'
+            tipo='nuevoProd' /> : <div></div>
+        }
+        {
+            modFallaProd ? 
+            <Modal 
+            texto='Falló al cargar el nuevo producto'
             tipo='nuevoProd' /> : <div></div>
         }
         <h2>Formulario</h2>

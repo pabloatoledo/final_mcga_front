@@ -1,15 +1,19 @@
 import Cookies from 'js-cookie';
 import { ADD_PROD, EDIT_PROD, REM_PROD } from './prod.types';
+import { useState } from 'react';
+import Modal from '../../Components/Modal/Modal';
 
-const token = Cookies.get('firebaseToken');
+const getToken = () => {
+  const tkn = Cookies.get('firebaseToken');
+  return tkn 
+}
 
 export const addProd = (prod) => async dispatch => {
-  const tokenauthorization = "Bearer " + token
   
-  console.log(tokenauthorization)
+  const token = getToken()
+
   try {
     await fetch ( "https://final-mcga-back.vercel.app/final_mcga/products/", 
-    // const respNewProd = await fetch( "http://localhost:5000/final_mcga/products" ,
     {
       method: 'POST',
       headers: {
@@ -24,10 +28,8 @@ export const addProd = (prod) => async dispatch => {
             stock: prod.stock,
             description: prod.description})
     })
-    .then(async function(respuesta) {
+    .then(function(respuesta) {
       if (respuesta.ok) {
-        const dataNewProd = await respuesta.json()
-        console.log(dataNewProd.data)
         dispatch({
           type: ADD_PROD,
           payload: prod
@@ -43,6 +45,9 @@ export const addProd = (prod) => async dispatch => {
 };
   
 export const editProd = (prod) => async dispatch => {
+
+  const token = getToken()
+
   try {
     await fetch ("https://final-mcga-back.vercel.app/final_mcga/products/" + prod.id, 
     {
@@ -61,7 +66,6 @@ export const editProd = (prod) => async dispatch => {
             description: prod.description})
     })
     .then(function(respuesta) {
-      console.log(respuesta)
       if (respuesta.ok) {
         dispatch({
           type: EDIT_PROD,
@@ -77,6 +81,9 @@ export const editProd = (prod) => async dispatch => {
 };
   
 export const remProd = (prod) => async dispatch => {
+
+  const token = getToken()
+
   try {
     await fetch ('https://final-mcga-back.vercel.app/final_mcga/products/' + prod.id,
     {
@@ -87,7 +94,6 @@ export const remProd = (prod) => async dispatch => {
       }
     })
     .then(function(respuesta) {
-      console.log(respuesta)
       if (respuesta.ok) {
         dispatch({
             type: REM_PROD,
@@ -116,7 +122,6 @@ export const getProdCloud = () => async dispatch => {
     .then((data) => {
       if (respOk) {
         const prodCloud = data.data
-
         if (prodCloud.length > 0) {
           prodCloud.map((producto) => {
             dispatch({

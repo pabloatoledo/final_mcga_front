@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Link } from "react-router-dom";
 import HeaderSection from '../../Components/Header/Header';
 import FooterSection from '../../Components/Footer/Footer';
 import Boton from "../../Components/SharedComponents/Boton";
@@ -9,7 +8,7 @@ import Tabla from '../../Components/Table/table'
 import TablaCabecera from '../../Components/Table/tableHead'
 
 import firebaseAapp from "../../Firebase/credenciales";
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getAuth } from "firebase/auth"
 
 const auth = getAuth(firebaseAapp)
 

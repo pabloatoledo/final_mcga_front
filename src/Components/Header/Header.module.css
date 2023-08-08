@@ -1,14 +1,16 @@
 .cabecera {
     min-height: 125px;
     width: 100%;
-    background-color: #c5c5c5;
+    background-color: #545050;
 }
+
 .titulo {
     font-size: 40px;
     font-weight: 700;
     text-align: center;
-    color: gray;
+    color: rgb(23, 22, 22);
 }
+
 .navegacion {
     height: 50px;
     display: flex;
@@ -16,15 +18,17 @@
     justify-content: space-around;
     vertical-align: center;
 }
+
 .navegacion a {
     font-size: 25px;
     text-decoration: none;
     width: 50%;
     text-align: center;
     padding: 5px;
-    color: #444;
+    color: #151414;
 }
+
 .navegacion a:hover {
-    background-color: red;
+    background-color: rgb(114, 106, 106);
     color: #EEE;
 }
