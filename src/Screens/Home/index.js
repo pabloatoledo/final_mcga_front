@@ -11,7 +11,6 @@ const Home = () => {
           <FooterSection />
         </div>
     )
-  }
-
+}
 
 export default Home;

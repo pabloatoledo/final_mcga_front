@@ -6,7 +6,6 @@ const HeaderSection = () => {
     return (
         <div className={styles.cabecera}>
             <p className={styles.titulo}>Aplicación Final MCGA - CRUD de productos</p>
-            
             <div className={styles.navegacion}>
             <Link to="/">
               Home

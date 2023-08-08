@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addProd, addProductRequest } from "../../redux/Productos/prod.actions";
+import { addProd } from "../../redux/Productos/prod.actions";
 import ProdInput from "../SharedComponents/Input";
 import Boton from "../SharedComponents/Boton";
 import styles from './Form.module.css';
@@ -11,16 +11,9 @@ import Modal from "../Modal/Modal";
 const Formulario = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-
     const [modNewProd, setModNewProd] = useState(false)
     const [modFallaProd, setModFallaProd] = useState(false)
-
-    const newProd = () => {
-        setModNewProd(false)
-    }
-
     const {register, formState: {errors}, handleSubmit} = useForm()
-
     const product = async (data) => {        
         setModNewProd(true);
         try {

@@ -11,9 +11,7 @@ import { useState } from "react";
 const auth = getAuth(firebaseAapp)
 
 const RoutesAPP = () => {
-
     const [userLogin, setUserLogin] = useState(false)
-
     onAuthStateChanged(auth, (userFirebase) => {
         if(userFirebase) {
             setUserLogin(true)
@@ -23,7 +21,6 @@ const RoutesAPP = () => {
     })
 
     return(
-        
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productos" element={<Productos />} />

@@ -17,8 +17,6 @@ const FooterSection = () => {
             </div>
             <p className={styles.copyRight}>&copy; {new Date().getFullYear()} Pablo Toledo-Marcos Zalazar-MCGA Final</p>
         </div>
-
     );
 }
-
 export default React.memo(FooterSection);

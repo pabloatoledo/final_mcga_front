@@ -16,6 +16,9 @@ const Login = () => {
     const [modFalIniSes, setModFalSes] = useState(false)
     const [modNuevoUsu, setModNuevoUsu] = useState(false)
     const [modFalNueUsu, setModFalNueUsu] = useState(false)
+    const [modCieSes, setModCieSes] = useState(false)
+    const [modFalCieSes, setModFalCieSes] = useState(false)
+
 
     const [noUserReg, setNoUserReg] = useState(false)
     const navigate = useNavigate()
@@ -53,12 +56,21 @@ const Login = () => {
     }
 
     const cerrarSesion = async (e) => {
-        console.log("abre modal indicando que cierra sesion")
-        await signOut(auth)
-        .then((resp) => {
-            console.log("cierra el modal de cierre de sesion")
-            navigate('/')
-        })
+        setModCieSes(true)
+        try {
+            await signOut(auth)
+            .then((resp) => {
+                setModCieSes(false)
+                navigate('/')
+            })
+        } catch {
+            setModCieSes(false)
+            setModFalCieSes(true)
+            setTimeout(() => {
+                setModFalCieSes(false)
+            }, 2500);
+        }
+        
     }
 
     const sumbitHandler = (e) => {
@@ -100,9 +112,20 @@ const Login = () => {
                 texto='Falló la creación del usuario, intente nuevamente mas tarde'
                 tipo='nuevoProd' /> : <div></div>
             }
+            {
+                modCieSes ? 
+                <Modal 
+                texto='Cerrando sesión'
+                tipo='nuevoProd' /> : <div></div>
+            }
+            {
+                modFalCieSes ? 
+                <Modal 
+                texto='Falló el cierre de sesión, verifique los datos'
+                tipo='nuevoProd' /> : <div></div>
+            }
             <Header />
             <h1>Gestión del perfil</h1>
-            {console.log(auth)}
             {auth.currentUser == null ?
                 <>
                     {noUserReg ? <><h2>Ingresa los datos para registrarte</h2></> : <><h2>Inicia sesión</h2></>}
