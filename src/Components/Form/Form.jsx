@@ -19,6 +19,7 @@ const Formulario = () => {
         try {
             await dispatch(addProd(data));
             setModNewProd(false)
+            navigate('/productos');
         } catch (error) {
             setModNewProd(false)
             setModFallaProd(true)
@@ -26,7 +27,6 @@ const Formulario = () => {
                 setModNewProd(false)
             }, 2000);
         }
-        navigate('/productos');
     }
 
     return (
